@@ -19,4 +19,5 @@ windows:
 	GOOS=windows GOARCH=amd64 go build -o app-windows.exe
 
 
-.PHONY linux arm macos windows
+.PHONY: 
+	linux arm macos windows
