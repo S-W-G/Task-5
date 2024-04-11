@@ -7,14 +7,10 @@ IMAGE_TAG ?= your-app:$(OS)-$(ARCH)
 
 all: linux arm macos windows
 
-image:
-    docker build -t $(IMAGE_TAG) .
-
-linux:
-	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
+linux: docker-build
 	docker push $(IMAGE_TAG)
 
-arm:
+arm: 
 	$(MAKE) OS=linux ARCH=arm64 docker-build
 
 macos:
@@ -25,7 +21,6 @@ windows:
 
 docker-build:
 	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
-	docker push $(IMAGE_TAG)
 
 clean:
 	docker images -q -f reference=$(IMAGE_TAG) | xargs -r docker rmi
