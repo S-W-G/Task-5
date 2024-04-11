@@ -1,4 +1,4 @@
-IMAGE_TAG := image-tag
+IMAGE_TAG := image_name
 
 image:
 	docker build -t image_name .
