@@ -25,4 +25,4 @@ docker-build:
 	docker push $(IMAGE_TAG)
 
 clean:
-	docker rmi $(IMAGE_TAG) || true
+	docker images -q $(IMAGE_TAG) | xargs -r docker rmi
