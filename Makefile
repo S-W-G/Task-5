@@ -1,26 +1,31 @@
-IMAGE_TAG := image_name
+# Змінні для тегів образів
+LINUX_TAG := linux
+ARM_TAG := arm
+MACOS_TAG := macos
+WINDOWS_TAG := windows
 
-image:
-	docker build -t image_name .
+.PHONY: all linux arm macos windows clean
 
-all: 
-	linux
+# Збірка для різних платформ
+all: linux arm macos windows
+
+linux:
+    @echo "Building for Linux..."
+    # Команда для збірки для Linux
+
+arm:
+    @echo "Building for ARM..."
+    # Команда для збірки для ARM
+
+macos:
+    @echo "Building for macOS..."
+    # Команда для збірки для macOS
+
+windows:
+    @echo "Building for Windows..."
+    # Команда для збірки для Windows
 
 clean:
-	docker rmi ${IMAGE_TAG}
-
-linux: 
-	GOOS=linux GOARCH=amd64 go build -o app-linux
-
-arm: 
-	GOOS=linux GOARCH=arm64 go build -o app-arm
-
-macos: 
-	GOOS=darrwin GOARCH=amd64 go build -o app-macos
-
-windows: 
-	GOOS=windows GOARCH=amd64 go build -o app-windows.exe
-
-
-.PHONY: 
-	linux arm macos windows
+    @echo "Cleaning up..."
+    # Команда для видалення новоствореного образу
+    docker rmi <IMAGE_TAG>
