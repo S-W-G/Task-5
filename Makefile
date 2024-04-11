@@ -1,20 +1,28 @@
-LINUX_TAG := linux
-ARM_TAG := arm
-MACOS_TAG := macos
-WINDOWS_TAG := windows
+SHELL := /bin/bash
+OS ?= linux
+ARCH ?= amd64
+IMAGE_TAG ?= your-app:$(OS)-$(ARCH)
+
+.PHONY: all clean linux arm macos windows
+
+all: linux arm macos windows
 
 linux:
-    @echo "Building for Linux..."
+	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
+	docker push $(IMAGE_TAG)
 
 arm:
-    @echo "Building for ARM..."
+	make OS=linux ARCH=arm64 docker-build
 
 macos:
-    @echo "Building for macOS..."
+	make OS=darwin ARCH=amd64 docker-build
 
 windows:
-    @echo "Building for Windows..."
+	make OS=windows ARCH=amd64 docker-build
+
+docker-build:
+	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
+	docker push $(IMAGE_TAG)
 
 clean:
-    @echo "Cleaning up..."
-    docker rmi <IMAGE_TAG>
+	docker rmi $(IMAGE_TAG)
