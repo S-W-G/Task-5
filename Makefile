@@ -7,6 +7,9 @@ IMAGE_TAG ?= your-app:$(OS)-$(ARCH)
 
 all: linux arm macos windows
 
+image:
+    docker build -t $(IMAGE_TAG) .
+
 linux:
 	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
 	docker push $(IMAGE_TAG)
