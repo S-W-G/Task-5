@@ -4,10 +4,12 @@ ARM_TAG := arm
 MACOS_TAG := macos
 WINDOWS_TAG := windows
 
-.PHONY: all linux arm macos windows clean
+.PHONY:
+    all linux arm macos windows clean
 
 # Збірка для різних платформ
-all: linux arm macos windows
+all:
+    linux arm macos windows
 
 linux:
     @echo "Building for Linux..."
