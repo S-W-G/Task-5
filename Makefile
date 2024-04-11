@@ -3,7 +3,7 @@ OS ?= linux
 ARCH ?= amd64
 IMAGE_TAG ?= your-app:$(OS)-$(ARCH)
 
-.PHONY: all clean linux arm macos windows
+.PHONY: all clean linux arm macos windows docker-build
 
 all: linux arm macos windows
 
@@ -25,4 +25,4 @@ docker-build:
 	docker push $(IMAGE_TAG)
 
 clean:
-	docker rmi $(IMAGE_TAG)
+	docker rmi $(IMAGE_TAG) || true
