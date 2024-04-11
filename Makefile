@@ -12,13 +12,13 @@ linux:
 	docker push $(IMAGE_TAG)
 
 arm:
-	make OS=linux ARCH=arm64 docker-build
+	$(MAKE) OS=linux ARCH=arm64 docker-build
 
 macos:
-	make OS=darwin ARCH=amd64 docker-build
+	$(MAKE) OS=darwin ARCH=amd64 docker-build
 
 windows:
-	make OS=windows ARCH=amd64 docker-build
+	$(MAKE) OS=windows ARCH=amd64 docker-build
 
 docker-build:
 	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
