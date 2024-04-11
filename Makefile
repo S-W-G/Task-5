@@ -23,4 +23,4 @@ docker-build:
 	docker build -t $(IMAGE_TAG) --build-arg OS=$(OS) --build-arg ARCH=$(ARCH) .
 
 clean:
-	docker images -q -f reference=$(IMAGE_TAG) | xargs -r docker rmi
+	docker images -q -f reference=$(IMAGE_TAG) | xargs -r docker rmi || true
