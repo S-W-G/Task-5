@@ -25,4 +25,4 @@ docker-build:
 	docker push $(IMAGE_TAG)
 
 clean:
-	docker images -q $(IMAGE_TAG) | xargs -r docker rmi
+	docker images -q -f reference=$(IMAGE_TAG) | xargs -r docker rmi
