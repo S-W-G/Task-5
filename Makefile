@@ -1,5 +1,8 @@
 IMAGE_TAG := image-tag
 
+image:
+	docker build -t image_name .
+
 all: 
 	linux
 
